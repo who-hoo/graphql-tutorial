@@ -1,11 +1,16 @@
 {
   "name": "graphql-tutorial",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.ts",
   "repository": "https://github.com/who-hoo/graphql-tutorial.git",
   "author": "who-hoo <who.ho3ov@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "graphql-yoga": "^1.18.3"
+    "graphql-yoga": "^1.18.3",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  },
+  "scripts": {
+    "start": "nodemon"
   }
 }
