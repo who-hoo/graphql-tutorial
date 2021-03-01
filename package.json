@@ -1,0 +1,11 @@
+{
+  "name": "graphql-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/who-hoo/graphql-tutorial.git",
+  "author": "who-hoo <who.ho3ov@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3"
+  }
+}
