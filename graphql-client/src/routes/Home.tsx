@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import styled from "styled-components";
+import Movie from "../components/Movie";
 
 const Container = styled.div`
   display: flex;
@@ -68,7 +69,7 @@ const Home = () => {
         !error &&
         data.movies &&
         data.movies.map((movie: { id: number }) => (
-          <ul key={movie.id}>{movie.id}</ul>
+          <Movie key={movie.id} id={movie.id} />
         ))}
     </Container>
   );
