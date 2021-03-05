@@ -1,5 +1,48 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
+import styled from "styled-components";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+`;
+
+const Header = styled.div`
+  background-image: linear-gradient(-45deg, #d754ab, #fd723a);
+  height: 45vh;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+`;
+
+const Title = styled.h1`
+  font-size: 60px;
+  font-weight: 600;
+  margin-bottom: 20px;
+`;
+
+const Subtitle = styled.h3`
+  font-size: 15px;
+`;
+
+const Loading = styled.div`
+  font-size: 18px;
+  opacity: 0.5;
+  font-weight: 500;
+  margin-top: 10px;
+`;
+
+const Error = styled.div`
+  font-size: 18px;
+  opacity: 0.5;
+  font-weight: 500;
+  margin-top: 10px;
+`;
 
 const GET_MOVIES = gql`
   query {
@@ -13,19 +56,21 @@ const GET_MOVIES = gql`
 const Home = () => {
   const { loading, error, data } = useQuery(GET_MOVIES);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
   return (
-    <div>
-      <h1>Home</h1>
+    <Container>
+      <Header>
+        <Title>Movies</Title>
+        <Subtitle>My First GraphQL</Subtitle>
+      </Header>
+      {loading && <Loading>Loading...</Loading>}
+      {error && <Error>Error :(</Error>}
       {!loading &&
         !error &&
         data.movies &&
         data.movies.map((movie: { id: number }) => (
           <ul key={movie.id}>{movie.id}</ul>
         ))}
-    </div>
+    </Container>
   );
 };
 
