@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery, gql } from "@apollo/client";
 import styled from "styled-components";
-import Movie from "../components/Movie";
+import Movie from "../components/Movie.js";
 
 const Container = styled.div`
   display: flex;
@@ -45,6 +45,15 @@ const Error = styled.div`
   margin-top: 10px;
 `;
 
+const Movies = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 25px;
+  width: 60%;
+  position: relative;
+  top: -50px;
+`;
+
 const GET_MOVIES = gql`
   query {
     movies(limit: 10, rating: 9.0) {
@@ -56,7 +65,6 @@ const GET_MOVIES = gql`
 
 const Home = () => {
   const { loading, error, data } = useQuery(GET_MOVIES);
-
   return (
     <Container>
       <Header>
@@ -65,12 +73,19 @@ const Home = () => {
       </Header>
       {loading && <Loading>Loading...</Loading>}
       {error && <Error>Error :(</Error>}
-      {!loading &&
-        !error &&
-        data.movies &&
-        data.movies.map((movie: { id: number }) => (
-          <Movie key={movie.id} id={movie.id} />
-        ))}
+      {!loading && !error && data.movies && (
+        <Movies>
+          {data.movies.map(
+            (movie: { id: number; medium_cover_image: string }) => (
+              <Movie
+                key={movie.id}
+                id={movie.id}
+                imageUrl={movie.medium_cover_image}
+              />
+            )
+          )}
+        </Movies>
+      )}
     </Container>
   );
 };
