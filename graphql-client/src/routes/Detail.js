@@ -44,11 +44,13 @@ const Poster = styled.div`
 const GET_MOVIE = gql`
   query getMovie($id: Int!) {
     movie(id: $id) {
+      id
       title
       medium_cover_image
       language
       rating
       description_intro
+      isLiked @client
     }
   }
 `;
@@ -63,7 +65,13 @@ const Detail = () => {
     <Container>
       {error && <h1 style={{ textAlign: "center" }}>Error :(</h1>}
       <Column>
-        <Title>{loading ? "Loading..." : data?.movie?.title}</Title>
+        <Title>
+          {loading
+            ? "Loading..."
+            : `${data?.movie?.title} ${
+                data?.movie?.isLiked ? "💖" : "😞"
+              }`}{" "}
+        </Title>
         {
           <>
             <Subtitle>
