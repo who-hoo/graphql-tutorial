@@ -63,19 +63,17 @@ const Detail = () => {
     <Container>
       {error && <h1 style={{ textAlign: "center" }}>Error :(</h1>}
       <Column>
-        <Title>{loading ? "Loading..." : data.movie.title}</Title>
-        {!loading && !error && data && data.movie && (
+        <Title>{loading ? "Loading..." : data?.movie?.title}</Title>
+        {
           <>
             <Subtitle>
-              {data.movie.language} / {data.movie.rating}
+              {data?.movie?.language} / {data?.movie?.rating}
             </Subtitle>
-            <Description>{data.movie.description_intro}</Description>
+            <Description>{data?.movie?.description_intro}</Description>
           </>
-        )}
+        }
       </Column>
-      <Poster
-        imageUrl={data && data.movie ? data.movie.medium_cover_image : ""}
-      ></Poster>
+      <Poster imageUrl={data?.movie?.medium_cover_image}></Poster>
     </Container>
   );
 };

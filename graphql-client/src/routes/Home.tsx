@@ -73,9 +73,9 @@ const Home = () => {
       </Header>
       {loading && <Loading>Loading...</Loading>}
       {error && <Error>Error :(</Error>}
-      {!loading && !error && data.movies && (
+      {
         <Movies>
-          {data.movies.map(
+          {data?.movies?.map(
             (movie: { id: number; medium_cover_image: string }) => (
               <Movie
                 key={movie.id}
@@ -85,7 +85,7 @@ const Home = () => {
             )
           )}
         </Movies>
-      )}
+      }
     </Container>
   );
 };
